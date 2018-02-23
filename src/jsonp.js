@@ -24,8 +24,7 @@ export default function jsonp(args) {
   };
 
   // 将自定义配置合并到默认配置
-  const { opt: customOpt } = args;
-  Object.assign(defaultOpt, customOpt);
+  Object.assign(defaultOpt, args);
 
   // Symbol 注册名
   const { name = `${defaultOpt.prefix}${count}` } = defaultOpt;

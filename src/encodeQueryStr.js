@@ -1,13 +1,13 @@
 export default function encodeQueryStr(data) {
   let s = '';
 
-  if (!data.length) {
+  if (data == null || !Object.keys(data).length) {
     return '';
   }
 
   const entries = Object.entries(data);
 
-  entries.froEach(([key, value]) => {
+  entries.forEach(([key, value]) => {
     s += `${key}=${encodeURIComponent(value)}&`;
   });
 
