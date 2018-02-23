@@ -1,0 +1,19 @@
+{
+  "name": "es6jsonp",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:Calerme/es6jsonp.git",
+  "author": "Caler Loo",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
+    "webpack": "^3.11.0"
+  },
+  "scripts": {
+    "lint": "eslint src/*",
+    "fix": "yarn run lint --fix"
+  }
+}
