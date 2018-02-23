@@ -136,7 +136,7 @@ function jsonp(args) {
   // 拼接 URL
   var url = defaultOpt.url;
 
-  if (!queryString) {
+  if (queryString) {
     url += url.indexOf('?') === -1 ? '?' + queryString : '&' + queryString;
   }
 
@@ -148,9 +148,7 @@ function jsonp(args) {
 
     var script = document.createElement('script');
     script.addEventListener('load', function () {
-      var target = document.querySelector('script') || document.head;
-      target.parentElement.insertBefore(script, target);
-      reject();
+      resolve();
     });
     script.addEventListener('error', function () {
       window[fn] = function () {};
@@ -159,6 +157,9 @@ function jsonp(args) {
       reject(new Error('请求发生错误！'));
     });
     script.src = url;
+    // 经实验，script 只有插入到页面时才会进行加载
+    var target = document.querySelector('script') || document.head;
+    target.parentElement.insertBefore(script, target);
 
     // 设置超时
     timer = setTimeout(function () {

@@ -38,7 +38,7 @@ export default function jsonp(args) {
 
   // 拼接 URL
   let { url } = defaultOpt;
-  if (!queryString) {
+  if (queryString) {
     url += url.indexOf('?') === -1 ? `?${queryString}` : `&${queryString}`;
   }
 
@@ -50,9 +50,7 @@ export default function jsonp(args) {
 
     let script = document.createElement('script');
     script.addEventListener('load', () => {
-      const target = document.querySelector('script') || document.head;
-      target.parentElement.insertBefore(script, target);
-      reject();
+      resolve();
     });
     script.addEventListener('error', () => {
       window[fn] = () => {};
@@ -61,6 +59,9 @@ export default function jsonp(args) {
       reject(new Error('请求发生错误！'));
     });
     script.src = url;
+    // 经实验，script 只有插入到页面时才会进行加载
+    const target = document.querySelector('script') || document.head;
+    target.parentElement.insertBefore(script, target);
 
     // 设置超时
     timer = setTimeout(() => {

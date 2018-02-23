@@ -7,7 +7,7 @@
   <title>TEST PAGE</title>
 </head>
 <body>
-  <script src="/dist/jsonp.js"></script>
+  <script src="/jsonp.js"></script>
   <script>
     jsonp({
       url: '/package.json',
@@ -15,10 +15,10 @@
         name: '李四',
         age: 24,
       },
-      timeout: 6000,
-    })
-    .catch(err=>{
-      console.log(err);
+      tmeout: 6000,
+      callback (data) {
+        console.log(data);
+      }
     });
   </script>
 </body>
